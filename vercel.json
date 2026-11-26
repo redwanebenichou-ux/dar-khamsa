@@ -1,0 +1,12 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
+  "regions": ["cdg1"],
+  "headers": [
+    {
+      "source": "/p/:path*",
+      "headers": [{ "key": "Cache-Control", "value": "public, s-maxage=60, stale-while-revalidate=300" }]
+    }
+  ]
+}
