@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #c6a15b;
+  --ink: #171513;
+  --ivory: #f5f0e7;
+  --beige: #e7ddcc;
+  --brown: #40352b;
+}
+
+html { scroll-behavior: smooth; }
+body { @apply bg-ivory text-ink antialiased; }
+
+::selection { background: var(--gold); color: var(--ink); }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #c9bda9; border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold transition-all duration-200 select-none disabled:opacity-50 disabled:pointer-events-none; }
+  .btn-gold { @apply btn bg-gold text-ink hover:bg-golddark hover:text-ivory shadow-sm; }
+  .btn-dark { @apply btn bg-ink text-ivory hover:bg-brown; }
+  .btn-ghost { @apply btn border border-ink/15 bg-white/60 hover:bg-white text-ink; }
+  .btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700; }
+  .input { @apply w-full rounded-lg border border-ink/15 bg-white px-3.5 py-2.5 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30 placeholder:text-ink/35; }
+  .label { @apply block text-xs font-bold text-ink/60 mb-1.5; }
+  .card { @apply rounded-xl border border-ink/10 bg-white shadow-card; }
+  .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-bold; }
+  .th { @apply text-right text-xs font-bold text-ink/50 pb-2 border-b border-ink/10; }
+  .td { @apply py-3 text-sm border-b border-ink/5 align-middle; }
+  .h1 { @apply text-2xl md:text-3xl font-black tracking-tight; }
+  .h2 { @apply text-lg font-extrabold; }
+  .muted { @apply text-ink/55 text-sm; }
+}
+
+/* zone المحرر */
+.builder-canvas [contenteditable="true"]:focus { outline: 2px dashed var(--gold); outline-offset: 4px; border-radius: 4px; }
+.builder-canvas .block-sel { outline: 2px solid var(--gold); outline-offset: -2px; position: relative; }
+.builder-canvas .block-sel::after {
+  content: attr(data-blabel); position: absolute; top: 0; inset-inline-start: 0;
+  background: var(--gold); color: var(--ink); font-size: 10px; font-weight: 800;
+  padding: 2px 8px; border-radius: 0 0 6px 0; z-index: 10; pointer-events: none;
+}
+.dragging { opacity: .55; }
+.drop-hint { outline: 2px dashed var(--gold); outline-offset: -2px; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.fade-up { animation: fadeUp .5s ease both; }
+
+@keyframes pulseGold { 0%,100% { box-shadow: 0 0 0 0 rgba(198,161,91,.55);} 50% { box-shadow: 0 0 0 9px rgba(198,161,91,0);} }
+.cta-pulse { animation: pulseGold 2s infinite; }
+
+@keyframes pricePop { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+.price-pop { animation: pricePop 3s ease-in-out infinite; transform-origin: center; }
